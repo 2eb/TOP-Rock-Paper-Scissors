@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+
+    function computerPlay(){
+        const randNum = Math.floor(Math.random()*3);
+        //console.log(randNum);
+        if (randNum === 0){
+            return "rock";
+        }else if (randNum === 1) {
+            return "paper";
+        }else{
+            return "scissors";
+        }
+    }
+
+    function playRound(playerSelection, computerSelection){
+        playerSelection = playerSelection.toLowerCase();
+        let score ="";
+        console.log(`Computer chose ${computerSelection}`);
+        switch(playerSelection){
+            case "rock":{
+                if (computerSelection === "rock") {
+                    score = "tie";
+                }else if (computerSelection ==="paper"){
+                    score = "lost";
+                }else if (computerSelection === "scissors"){
+                    score = "win";
+                }
+                break;
+            }
+            case "paper":{
+                if (computerSelection === "rock") {
+                    score = "win";
+                }else if (computerSelection ==="paper"){
+                    score = "tie";
+                }else if (computerSelection === "scissors"){
+                    score = "lost";
+                }
+                break;
+            }
+            case "scissors":{
+                if (computerSelection === "rock") {
+                    score = "lost";
+                }else if (computerSelection ==="paper"){
+                    score = "win";
+                }else if (computerSelection === "scissors"){
+                    score = "tie";
+                }
+                break;
+            }
+        }
+
+        if (score === "win"){
+            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+        }else if (score === "lost"){
+            console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+        }else if (score === "tie"){
+            console.log("It's a tie!");
+        }else {
+            console.log("Something went wrong with the score calculation.");
+        }
+        return score;
+    }
+
+    function game(){
+        let playerScore = 0, computerScore = 0;
+        for (let i=1; i<=5;i++){
+            const playerSelection = prompt("Rock,Paper or Scissors?");
+            const computerSelection = computerPlay();
+            const result = playRound(playerSelection,computerSelection);
+
+            if (result === "win") playerScore++;
+            if (result === "lost") computerScore++;
+
+        }
+        
+        if (playerScore > computerScore){
+            console.log(`Congrats! You won ${playerScore} to ${computerScore}.`);
+        }else if (playerScore < computerScore){
+            console.log(`You lost ${playerScore} to ${computerScore}. There there!`);
+        }else {
+            console.log(`It's a tie. Your scored: ${playerScore} and the computer scored:${computerScore}.`);
+        }
+
+    }
+
+    game();
+    
+</script>
+</html>
