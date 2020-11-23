@@ -22,6 +22,7 @@ body.appendChild(buttons);
 
 //create another div to display result of the round and overall score
 const scoreboard = document.createElement('div');
+scoreboard.classList.add('scoreboard');
 
 body.appendChild(scoreboard);
 
