@@ -11,8 +11,15 @@ body{
 }
 h1{
     font-size: 3rem;
-    margin: 40px auto;
+    margin: 20px auto;
+    margin-top: 40px;
 }
+h3{
+    margin-bottom: 40px;
+    font-weight: 300;
+    color: #333;
+}
+
 button{
     font-size: 16px;
     font-weight: bold;
@@ -23,15 +30,21 @@ button{
     border-radius: 5px;
     margin: 20px;
     width: 200px;
-    transition: border 0.5s;
+    transition: box-shadow 0.2s;
 
 }
 
 button:hover{
-    border: 5px solid rgba(256,256,256,0.5);
+    box-shadow: 2px 2px 5px 5px #999;
 }
 
 .scoreboard {
     margin-top: 40px;
     font-size: 1.4rem;
+    color: #333;
+}
+.score {
+    color: #000;
+    margin-bottom: 20px;
+    font-weight: bold;
 }

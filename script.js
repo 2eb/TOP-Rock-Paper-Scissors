@@ -24,10 +24,21 @@ body.appendChild(buttons);
 const scoreboard = document.createElement('div');
 scoreboard.classList.add('scoreboard');
 
+const para1 = document.createElement('div');
+para1.classList.add('score');
+const para2 = document.createElement('div');
+const para3 = document.createElement('div');
+const para4 = document.createElement('div');
+
+scoreboard.appendChild(para1);
+scoreboard.appendChild(para2);
+scoreboard.appendChild(para3);
+scoreboard.appendChild(para4);
 body.appendChild(scoreboard);
 
 let playerScore=0;
 let computerScore = 0;
+let roundCount = 0;
 
 function computerPlay(){
     const randNum = Math.floor(Math.random()*3);
@@ -42,7 +53,8 @@ function computerPlay(){
 
 function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
-    let score ="";
+    roundCount++;
+    para1.textContent = `Round: ${roundCount}`;
     
     switch(playerSelection){
         case "rock":{
@@ -77,37 +89,41 @@ function playRound(playerSelection, computerSelection){
         }
     }
 
-    scoreboard.textContent = `You selected ${playerSelection} and the computer rolled ${computerSelection}. \n`;
+    para2.textContent = `You selected ${playerSelection} and the computer rolled ${computerSelection}. \n`;
 
     if (score === "win"){
-        scoreboard.textContent += `You win! ${playerSelection} beats ${computerSelection}`;
+        para3.textContent = `You win, ${playerSelection} beats ${computerSelection}!`;
         playerScore++;
     }else if (score === "lost"){
-        scoreboard.textContent += `You Lose! ${computerSelection} beats ${playerSelection}`;
+        para3.textContent = `You lose, ${computerSelection} beats ${playerSelection}!`;
         computerScore++;
     }else if (score === "tie"){
-        scoreboard.textContent += "It's a tie!" ;
+        para3.textContent = "It's a tie!" ;
     }else {
-        scoreboard.textContent += "Something went wrong with the score calculation.";
+        para3.textContent = "Something went wrong with the score calculation.";
     }
-    scoreboard.textContent += `\nPlayer:${playerScore} - Computer:${computerScore}`;
-    return score;
+
+    para4.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+    checkGameDone(playerScore, computerScore);
+}
+
+function checkGameDone(){
+    if (playerScore === 5) {
+        para1.textContent = 'Congrats you won the round. Select Rock Paper or Scissors to begin a new round.';
+        playerScore = 0;
+        computerScore = 0;
+        roundCount =0;
+    }
+    if (computerScore === 5) {
+        para1.textContent = 'Sorry, you lost. Select Rock Paper or Scissors to begin a new round';
+        playerScore = 0;
+        computerScore = 0;
+        roundCount = 0;
+    }
 }
 
 function play(e){
-    if (playerScore < 5 & computerScore < 5){
-        playRound(this.textContent, computerPlay());
-    }else if (playerScore === 5){
-        scoreboard.textContent = `Congrats you won ${playerScore} to ${computerScore}`;
-        playerScore = 0;
-        computerScore = 0;
-    }else if (computerScore === 5){
-        scoreboard.textContent = `Sorry you lost ${playerScore} to ${computerScore}`;
-        playerScore = 0;
-        computerScore = 0;
-    }else{
-        scoreboard.textContent = 'Whoops something went wrong!';
-    }
+    playRound(this.textContent, computerPlay());
     
 }
 
